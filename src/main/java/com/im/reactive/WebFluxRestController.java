@@ -39,10 +39,13 @@ public class WebFluxRestController {
     public Mono<String> rest(int idx) {
         //Mono<ClientResponse> res = client.get().uri(URL1,idx).exchange();
         //return body;
-        return client.get().uri(URL1,idx).exchange().flatMap(c -> c.bodyToMono(String.class));
+        //return  client.get().uri(URL1,idx).exchange().flatMap(c -> c.bodyToMono(String.class))
 
+        return client.get().uri(URL1, idx).exchange()
+                .flatMap(c -> c.bodyToMono(String.class))
+                .flatMap(res1 -> client.get().uri(URL2, res1).exchange())
+                .flatMap(c -> c.bodyToMono(String.class));
     }
-
 
     @Service
     public static class MyService{

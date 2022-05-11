@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ReactiveApplication {
 
     public static void main(String[] args) {
-        System.setProperty("reactor.ipc.netty.workerCount","2");
+        System.setProperty("reactor.ipc.netty.workerCount","1");
         System.setProperty("reactor.ipc.netty.pool.maxConnections","2000");
         SpringApplication.run(ReactiveApplication.class, args);
     }
